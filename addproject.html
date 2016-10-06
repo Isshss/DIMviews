@@ -64,8 +64,11 @@ function AddProject(containerDiv, main, parentProject) {
 	};
 	
 	this.updateProject = function(project) {
-		project.description = $(".descriptionInput").val();
-		project.exportLengthMeasurePrefix = $(".lengthMeasureInput").val();
+		//project.description = $(".descriptionInput").val();
+		//project.exportLengthMeasurePrefix = $(".lengthMeasureInput").val();
+		//update by shushan
+		project.description = "";
+		project.exportLengthMeasurePrefix = "meter";
 		Global.bimServerApi.call("ServiceInterface", "updateProject", {sProject: project}, function(){
 			main.showProject(project.oid, null, true);
 		});
@@ -81,9 +84,18 @@ function AddProject(containerDiv, main, parentProject) {
 				othis.updateProject(data);
 			});
 		} else {
+			/*
 			Global.bimServerApi.callWithFullIndication("ServiceInterface", "addProject", {
 				schema: $(".schemaInput").val(),
 				projectName: $(".addproject .inputName").val()
+			}, function(data){
+				othis.updateProject(data);
+			});
+			*/
+			alert("tt5");
+			Global.bimServerApi.callWithFullIndication("ServiceInterface", "addProject", {
+				schema: "ifc2x3tc1",
+				projectName: "tt5"
 			}, function(data){
 				othis.updateProject(data);
 			});
@@ -98,5 +110,7 @@ function AddProject(containerDiv, main, parentProject) {
 		}
 	});
 	$(".addproject .inputName").focus();
+	
+	window.onload=othis.addProject();
 }
 </script>

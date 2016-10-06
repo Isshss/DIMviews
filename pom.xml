@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.opensourcebim</groupId>
-	<artifactId>bimviews</artifactId>
-	<version>0.0.53-SNAPSHOT</version>
+	<groupId>com.github.Isshss</groupId>
+	<artifactId>dimviews</artifactId>
+	<version>0.0.23</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<description>BIMvie.ws</description>
+	<description>DIMvie.ws</description>
 	<build>
 		<resources>
 			<resource>
-				<directory>css</directory>
+				<directory>css</directory> 
 				<targetPath>css</targetPath>
 			</resource>
 			<resource>
@@ -125,11 +125,27 @@
 					<goals>deploy</goals>
 				</configuration>
 			</plugin>
+			 <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-gpg-plugin</artifactId>
+				  <version>1.5</version>
+				  <executions>
+					<execution>
+					  <id>sign-artifacts</id>
+					  <phase>verify</phase>
+					  <goals>
+						<goal>sign</goal>
+					  </goals>
+					</execution>
+				  </executions>
+			</plugin>
 		</plugins>
 	</build>
+	
+	<!--
 	<profiles>
-		<profile>
-			<id>release</id>
+		<profile>				
+			<id>release</id>			
 			<build>
 				<plugins>
 					<plugin>
@@ -150,6 +166,8 @@
 			</build>
 		</profile>
 	</profiles>
+	-->
+	
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -160,29 +178,37 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+	
 	<dependencies>
 	<dependency>
 		<groupId>org.opensourcebim</groupId>
 		<artifactId>bimsurfer</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.26</version>
 	</dependency>
 	</dependencies>
+
 	<scm>
-		<url>https://github.com/opensourceBIM/bimvie.ws.git</url>
-		<connection>scm:git:https://github.com/opensourceBIM/bimvie.ws.git</connection>
-		<developerConnection>scm:git:https://github.com/opensourceBIM/bimvie.ws.git</developerConnection>
-		<tag>bimviews-0.0.38</tag>
+		<url>https://github.com/Isshss/DIMviews.git</url>
+		<connection>scm:git:https://github.com/Isshss/DIMviews.git</connection>
+		<developerConnection>scm:git:https://github.com/Isshss/DIMviews.git</developerConnection>
+		<tag>dimviews-0.0.2</tag>
 	</scm>
+
+
 	<organization>
-		<name>OpenSource BIM</name>
-		<url>opensourcebim.org</url>
+		<name>OpenSource DIM</name>
+		<url>https://github.com/Isshss/DIMviews.git</url>
 	</organization>
+
+<!--
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/opensourceBIM/bimvie.ws/issues</url>
 	</issueManagement>
-	<name>BIMvie.ws</name>
-	<url>https://github.com/opensourceBIM/bimvie.ws</url>
+-->
+	<name>DIMviews</name>
+	<url>https://github.com/Isshss/DIMviews</url>
+
 	<licenses>
 		<license>
 			<name>GNU Affero General Public License</name>
@@ -190,10 +216,12 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	  
 	<developers>
 		<developer>
-			<email>ruben@logic-labs.nl</email>
-			<name>Ruben de Laat</name>
+			<email>shushan.hu@ucd.ie</email>
+			<name>Shushan Hu</name>
 		</developer>
 	</developers>
+	
 </project>

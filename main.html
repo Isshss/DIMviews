@@ -1,9 +1,11 @@
 <div class="main">
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
+	
 			<div class="navbar-header">
-				<a class="navbar-brand btnBrand">BIMvie.ws</a>
+				<a class="navbar-brand btnBrand">DIMvie.ws</a>
 			</div>
+			
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="dropdown projectLink"><a href="#" class="dropdown-toggle Project" data-toggle="dropdown">Project <b class="caret"></b></a>
@@ -11,6 +13,7 @@
 							<li><a class="btnAddProject">New project</a></li>
 							<li><a class="btnShowProjects">Show projects</a></li>
 						</ul></li>
+					<!--  shushan
 					<li class="dropdown usersettingsLink"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Settings <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a class="btnBasicSettings">User Settings</a></li>
@@ -24,6 +27,7 @@
 							<li><a class="btnModelCompareEngines">Model Compare Engines</a></li>
 							<li><a class="btnInternalServices">Internal Services</a></li>
 						</ul></li>
+					
 					<li class="dropdown serversettingsLink"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Server <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li role="presentation" class="dropdown-header">Server Settings</li>
@@ -48,6 +52,7 @@
 							<li><a class="btnAddUser">Add User</a></li>
 							<li><a class="btnListUsers">List Users</a></li>
 						</ul></li>
+					-->
 					<li class="dropdown userLink"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a class="changePasswordLink"><i></i>Change password</a></li>
@@ -57,6 +62,7 @@
 						</ul>
 					</li>
 					<li><a class="btnLicense">License</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -77,6 +83,7 @@ function Main(address, user) {
 	$(".main .addressLabel").html(address);
 	
 	this.show = function() {
+		//alert("main show");
 		Global.notifier.setSelector(".main .mainStatus .status");
 		Global.bimServerApi.call("AuthInterface", "getLoggedInUser", {}, function(user){
 			//$(".main .nav li").hide();
@@ -93,10 +100,56 @@ function Main(address, user) {
 					$("." + menuItem).show();
 				}
 			});
+			
+			//add shushan
+			alert("main show");
+			//pushHistory({page: "AddProject"}, "AddProject");
+			//var command = "null";
+			var fileName = "";
+			var ifcModel = "ifc2x3tc1";			
+			//pushHistory({page: command}, command);
+			
+			if(fileName != "")
+			{
+				var exited = 0;
+				//alert(fileName+" v1");
+				Global.bimServerApi.callWithNoIndication("ServiceInterface", "getAllProjectsSmall", {}, function(data){
+				
+				data.forEach(function(project){
+					//alert(project.name);
+					if(fileName == project.name)
+					{
+						//alert("show"+fileName);
+						exited = 1;
+						othis.showProject(project.oid, null, true);
+					}
+				}
+				);
+				
+				if(0 == exited)
+				{
+					//alert("create" + fileName);
+					Global.bimServerApi.callWithFullIndication("ServiceInterface", "addProject", {
+						schema: ifcModel,
+						projectName: fileName
+					}, function(newproject){
+						newproject.description = "";
+						newproject.exportLengthMeasurePrefix = "meter";
+						Global.bimServerApi.call("ServiceInterface", "updateProject", {sProject: newproject}, function(){
+						othis.showProject(newproject.oid, null, true);
+						});
+					});
+				}				
+				});
+			}
+			
+			//end shushan
+			
 			var history = History.getState().data;
 			if (history.page == "Dashboard") {
 				othis.showDashboard(null);
-			} else if (history.page == "Projects") {
+			} 
+			else if (history.page == "Projects") {
 				othis.showProjects(null);
 			} else if (history.page == "Project") {
 				othis.showProject(history.poid, function(){
@@ -141,7 +194,10 @@ function Main(address, user) {
 			} else {
 				Settings.createStartPage($(".main .maincontainer"), othis);
 			}
+			
 		});
+		//add by shushan
+		//showAddProject(null, parentProject);
 	};
 
 	this.logout = function() {

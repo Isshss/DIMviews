@@ -1,13 +1,13 @@
 {
-  "name": "bimviews",
-  "groupId": "org.opensourcebim",
-  "artifactId": "bimviews",
-  "organization": "OpenSource BIM",
-  "version": "0.0.2",
-  "description": "BIM Views is a JavaScript/HTML frontend to BIMserver",
+  "name": "dimviews",
+  "groupId": "com.github.Isshss",
+  "artifactId": "dimviews",
+  "organization": "com.github.Isshss",
+  "version": "0.0.23",
+  "description": "DIM Views is a JavaScript/HTML frontend to BIMserver",
   "author": {
-    "name": "Ruben de Laat",
-    "email": "ruben@logic-labs.nl"
+    "name": "Shushan Hu",
+    "email": "shushan.hu@ucd.ie"
   },
   "scripts": {},
   "files": [
@@ -16,10 +16,10 @@
   "main": "index.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/opensourceBIM/bimvie.ws"
+    "url": "https://github.com/Isshss/DIMviews"
   },
   "bugs": {
-    "url": "https://github.com/opensourceBIM/bimvie.ws/issues"
+    "url": "https://github.com/Isshss/DIMviews/issues"
   },
   "keywords": [],
   "dependencies": {

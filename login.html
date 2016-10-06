@@ -53,7 +53,9 @@ function Login(address, username, originalUrl) {
 	this.show = function(){};
 
 	this.login = function(address) {
-		Global.bimServerApi.login($(".username").val(), $("#inputPassword").val(), function(data){
+		//Global.bimServerApi.login($(".username").val(), $("#inputPassword").val(), function(data){
+		
+		Global.bimServerApi.login("admin@bimserver.org", "admin", function(data){
 			if ($("#rememberMe").is(":checked")) {
 				// Stored cookie
 				$.cookie("autologin" + window.document.location.port, Global.bimServerApi.token, { expires: 31, path: "/"});
@@ -139,5 +141,7 @@ function Login(address, username, originalUrl) {
 			new SelectServer();
 		});
 	});
+	
+	window.onload=othis.login($("#inputServer").val());
 }
 </script>
